@@ -21,8 +21,8 @@ const closeBtnClickHandler = () => {
   formContainer.classList.remove(`form__container-wrap--next-step`);
 
   const passwordsrequiredElements = form.querySelectorAll(`.form__password-required-list li`);
-
   const errorElements = form.querySelectorAll(`.form__error`);
+  const inputElements = form.querySelectorAll(`.form__input`);
 
   passwordsrequiredElements.forEach(element => {
     element.classList.remove(`error`, `success`);
@@ -31,6 +31,12 @@ const closeBtnClickHandler = () => {
   if (errorElements.length) {
     errorElements.forEach(element => {
       element.remove();
+    });
+  }
+
+  if (inputElements.length) {
+    inputElements(element => {
+      element.classList.remove(`error`);
     });
   }
 

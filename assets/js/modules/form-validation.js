@@ -221,10 +221,16 @@ const passwordInputHandler = () => {
 }
 
 const isPasswordEqualAnotherField = (inputValue) => {
-  if (inputValue === nickNameField.value || inputValue === emailField.value) {
-    addErrorElement(passwordField, passwordInputContainer, ErrorTexts.password.equal, `password-equal-error`)
+  if (inputValue.length && inputValue === nickNameField.value || inputValue === emailField.value) {
+    addErrorElement(passwordField, passwordInputContainer, ErrorTexts.password.equal, `password-equal-error`);
+    return;
   }
 
+  const currentErrors = passwordInputContainer.querySelectorAll(`.form__error`);
+
+  if (currentErrors) {
+    removeCurrentErrors(currentErrors);
+  }
   deleteErrorsMark(passwordField);
 
   return true;
@@ -253,6 +259,7 @@ const passwordChangeHandler = () => {
     passwordField.classList.remove(`error`);
   } else {
     validityList.password = false;
+    passwordField.classList.add(`error`);
   }
 }
 
@@ -309,9 +316,19 @@ const agreementChangehandler = () => {
 }
 
 export default function validateForm() {
-  nickNameField.addEventListener(`change`, addErrorsForNickname);
+  nickNameField.addEventListener(`change`, () => {
+    addErrorsForNickname();
+    if(isPasswordHasInput) {
+      isPasswordEqualAnotherField(passwordField.value);
+    }
+  });
   nickNameField.addEventListener(`input`, removeErrorsForNickname);
-  emailField.addEventListener(`change`, addErrorsForEmail);
+  emailField.addEventListener(`change`, () => {
+    addErrorsForEmail();
+    if(isPasswordHasInput) {
+      isPasswordEqualAnotherField(passwordField.value);
+    }
+  });
   emailField.addEventListener(`input`, removeErrorsForEmail);
 
   passwordField.addEventListener(`input`, passwordInputHandler);
@@ -340,7 +357,6 @@ export default function validateForm() {
     let adaptedFormData = [];
 
     for (const input of entires) {
-      console.log(input[0] + ': ' + input[1]);
       const key = `${input[0]}`;
 
       adaptedFormData.push({
