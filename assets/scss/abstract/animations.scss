@@ -1,0 +1,23 @@
+@keyframes from-top {
+    0% {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes to-top {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    100% {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+  }

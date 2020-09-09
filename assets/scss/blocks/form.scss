@@ -1,0 +1,158 @@
+.form {
+  $error-color: $--red-error-color;
+  $bg-color: $--real-white;
+
+  display: none;
+  background-color: $bg-color;
+  animation: from-top 0.3s;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 480px;
+
+  &--opened {
+    display: block;
+  }
+
+  &--closed {
+    animation: to-top 0.35s;
+  }
+
+  &__header {
+    margin-top: 0;
+  }
+
+  &__head-wrapper {
+    position: relative;
+  }
+
+  &__close-btn {
+    @include close-btn;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__fieldset {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+  }
+
+  &__container {
+    overflow: hidden;
+
+    &-wrap {
+      display: flex;
+      flex-wrap: nowrap;
+      transition: transform 0.3s;
+
+      &--next-step {
+        transform: translateX(-100%);
+      }
+    }
+  }
+
+  &__row {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  &__label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 5px;
+
+    &--checkbox {
+      @include chekbox-radio-label(2px);
+    }
+
+    &--radio {
+      @include chekbox-radio-label(50%);
+    }
+  }
+
+  &__input {
+    $border-color: $--border-gray;
+    $text-color: $--real-black;
+    $focus-color: $--light-blue;
+    $error-color: $--red-error-color;
+    $check-color: $--real-white;
+
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $border-color;
+    color: $text-color;
+    padding: 10px 20px;
+
+    &:focus {
+      outline: none;
+      border-color: $focus-color;
+    }
+
+    &.error {
+      border-color: $error-color;
+      box-shadow: none;
+    }
+
+    &--checkbox {
+      @include checkbox-radio;
+      &:checked {
+        & + label {
+          &::after {
+            width: 7px;
+            height: 3px;
+            border-radius: 2px;
+            border-right: 3px solid $check-color;
+            border-top: 3px solid $check-color;
+            left: 0;
+            transform: translate(3px, -12px) rotate(135deg);
+          }
+        }
+      }
+    }
+
+    &--radio {
+      @include checkbox-radio;
+      &:checked {
+        & + label {
+          &::after {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
+  }
+
+  &__error {
+    display: block;
+    padding: 3px 0;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    line-height: 14px;
+    color: $error-color;
+  }
+
+  &__password-required {
+    $text-color: $--required-gray;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    color: $text-color;
+  }
+}

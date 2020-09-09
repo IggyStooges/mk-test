@@ -1,0 +1,70 @@
+.required-list {
+  $text-color: $--required-gray;
+
+  @include list-style-reset;
+
+  color: $text-color;
+  font-size: 12px;
+  line-height: 14px;
+
+  &__item {
+    $success-color: $--green-success-color;
+    $error-color: $--red-error-color;
+
+    padding: 3px 20px;
+    position: relative;
+
+    &-circle {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      border: 1px solid $text-color;
+    }
+
+    &.success {
+      color: $success-color;
+    }
+
+    &.success & {
+      &-circle {
+        border-color: $success-color;
+
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          width: 7px;
+          height: 3px;
+          border-radius: 2px;
+          border-right: 3px solid $success-color;
+          border-top: 3px solid $success-color;
+          transform: translate(2px, 3px) rotate(135deg);
+        }
+      }
+    }
+
+    &.error {
+      color: $error-color;
+    }
+
+    &.error & {
+      &-circle {
+        @include cross;
+        border-color: $error-color;
+
+        &::before,
+        &::after {
+          content: "";
+          width: 12px;
+          height: 3px;
+          background-color: $error-color;
+        }
+      }
+    }
+  }
+}

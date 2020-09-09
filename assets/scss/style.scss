@@ -1,0 +1,12 @@
+@import "normalize.scss";
+
+@import "./abstract/variables.scss";
+@import "./abstract/mixin.scss";
+@import "./abstract/animations.scss";
+
+@import "global.scss";
+@import "./blocks/main.scss";
+@import "./blocks/registration.scss";
+@import "./blocks/form.scss";
+@import "./blocks/required-list.scss";
+@import "./components/btn.scss";

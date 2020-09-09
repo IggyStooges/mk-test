@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <main class="main">
+        <h1 style="display: none;">Регистрация в МК</h1>
+        <div class="main__container">
+            <div class="registration">
+                <button type="button" class="registration__open-form-btn">
+                    Регистрация
+                </button>
+
+                <form action="POST" class="registration__form form">
+                    <div class="form__head-wrapper">
+                        <h2 class="form__header">Регистрация</h2>
+                        <button type="button" class="form__close-btn">
+                          <span class="visually-hidden">
+                            закрыть
+                          </span>
+                        </button>
+                    </div>
+                    <div class="form__container">
+                        <div class="form__container-wrap">
+                            <fieldset class="form__fieldset form__fieldset--step-one">
+                                <div class="form__row">
+                                    <label class="form__label" for="email">E-mail</label>
+                                    <input class="form__input" type="email" placeholder="me@example.com" id="email" name="email" required="">
+                                </div>
+                                <div class="form__row">
+                                    <label class="form__label" for="nickname">Никнейм</label>
+                                    <input class="form__input" type="text" placeholder="введите Никнейм" id="nickname" name="nickname" required="">
+                                </div>
+                                <div class="form__row">
+                                    <label class="form__label" for="password">Пароль</label>
+                                    <input class="form__input" type="password" placeholder="Пароль" id="password" name="password" required="">
+                                    <span class="form__error"></span>
+                                    <b class="form__password-required">Пароль должен содержать:</b>
+                                    <ul class="form__password-required-list required-list">
+                                        <li class="required-list__item" data-password-validate="length">
+                                            <span class="required-list__item-circle"></span>
+                                            <span>от 6 до 32 символов </span>
+                                        </li>
+                                        <li class="required-list__item" data-password-validate="number">
+                                            <span class="required-list__item-circle"></span>
+                                            <span>цифру</span>
+                                        </li>
+                                        <li class="required-list__item" data-password-validate="register">
+                                            <span class="required-list__item-circle"></span>
+                                            <span>заглавную и строчкую буквы</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="form__row">
+                                    <label class="form__label" for="password-confirmation">E-mail</label>
+                                    <input class="form__input" type="password" placeholder="Пароль еще раз" id="password-confirmation" name="password-confirmation" required="">
+                                </div>
+
+                                <div class="form__row">
+                                    <input class="form__input form__input--checkbox visually-hidden" type="checkbox" id="agreement" name="agreement" required="">
+                                    <label class="form__label form__label--checkbox" for="agreement">Я принимаю условия <a href="agreement.html">Пользовательского соглашения</a></label>
+                                </div>
+                                <button type="button" class="form__next-step-btn btn" disabled>Далее</button>
+
+                            </fieldset>
+                            <fieldset class="form__fieldset form__fieldset--step-two">
+                                <div class="form__row">
+                                    <span class="form__label">Выберите ваш пол</label>
+
+                                    <input class="form__input form__input--radio visually-hidden" type="radio" placeholder="введите email" id="woman" name="sex">
+                                    <label class="form__label form__label--radio" for="woman">woman</label>
+                                    <input class="form__input form__input--radio visually-hidden" type="radio" placeholder="введите email" id="man" name="sex">
+                                    <label class="form__label form__label--radio" for="man">man</label>
+                                </div>
+                                <div class="form__row">
+                                    <label class="form__label" for="education">Уровень образования</label>
+                                    <select class="form__input" name="education" id="education">
+                                        <option value="high">Высшее</option>
+                                        <option value="middle">Среднее</option>
+                                        <option value="post-graduate">Кандидат наук</option>
+                                    </select>
+                                </div>
+                                <div class="form__row">
+                                    <label class="form__label" for="education">Расскажите о себе</label>
+                                    <textarea class="form__input" name="about-user" id="about-user" cols="10" rows="10" placeholder="Расскажите о себе"></textarea>
+                                </div>
+                                <div class="form__row">
+                                    <span class="form__label">Интересующие темы</label>
+
+                                    <input class="form__input form__input--checkbox visually-hidden" type="checkbox" id="politics" name="interest" value="politics">
+                                    <label class="form__label form__label--checkbox" for="politics">Политика</label>
+                                    <input class="form__input form__input--checkbox visually-hidden" type="checkbox" id="finance" name="interest" value="finance">
+                                    <label class="form__label form__label--checkbox" for="finance">Финансы</label>
+                                    <input class="form__input form__input--checkbox visually-hidden" type="checkbox" id="economic" name="interest" value="economic">
+                                    <label class="form__label form__label--checkbox" for="economic">Экономика</label>
+                                    <input class="form__input form__input--checkbox visually-hidden" type="checkbox" id="sport" name="interest" value="sport">
+                                    <label class="form__label form__label--checkbox" for="sport">Спорт</label>
+                                </div>
+                                <button type="submit" class="form__submit btn">Отправить</button>
+
+                            </fieldset>
+                        </div>
+                    </div>  
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/script.js"></script>
+    
+
+
+</body>
+</html>

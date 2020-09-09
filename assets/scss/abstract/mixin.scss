@@ -1,0 +1,158 @@
+@mixin btn-reset {
+  border: none;
+  display: flex;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin list-style-reset {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+@mixin cross {
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+@mixin main-btn {
+  @include btn-reset;
+
+  $bg-color: $--main-blue;
+  $bg-disabled-color: $--light-blue;
+  $text-color: $--real-white;
+  $hover-shadow: $--shadow-color;
+
+  background-color: $bg-color;
+  padding: 13px 30px;
+  justify-content: center;
+  align-items: center;
+  color: $text-color;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 3px;
+  transition: box-shadow 0.3s, background-color 0.3s;
+  min-width: 150px;
+  margin: 0 auto;
+
+  &:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  }
+
+  &:disabled {
+    background-color: $bg-disabled-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin close-btn {
+  @include btn-reset;
+  @include cross;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  display: block;
+
+  &::before,
+  &::after {
+    $bg-color: $--additional-gray;
+    content: "";
+    width: 18px;
+    height: 2px;
+    background-color: $bg-color;
+  }
+}
+
+@mixin checkbox-radio {
+  $border-color: $--main-blue;
+  $check-color: $--real-white;
+  $error-color: $--red-error-color;
+
+  &:focus {
+    & + label {
+      &::before {
+        border-color: $border-color;
+      }
+    }
+  }
+
+  &.error {
+    & + label {
+      &::before {
+        border-color: $error-color;
+      }
+    }
+  }
+
+  &:checked {
+    & + label {
+      &::before {
+        background-color: $border-color;
+        border-color: $border-color;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+      }
+    }
+  }
+}
+
+@mixin chekbox-radio-label($border-radius) {
+  position: relative;
+  font-weight: normal;
+  font-size: 12px;
+  padding-left: 20px;
+  cursor: pointer;
+
+  &::before {
+    $border-color: $--border-gray;
+
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid $border-color;
+    border-radius: $border-radius;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &:hover {
+    $border-color: $--main-blue;
+    &::before {
+      border-color: $border-color;
+    }
+  }
+}

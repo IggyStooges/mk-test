@@ -1,0 +1,11 @@
+.registration {
+  &__open-form-btn {
+    @include main-btn;
+    width: 200px;
+
+    &:disabled {
+      $bg-color: $--green-success-color;
+      background-color: $bg-color;
+    }
+  }
+}
