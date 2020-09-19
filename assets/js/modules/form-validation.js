@@ -27,7 +27,6 @@ const validityList = {
   agreement: false
 };
 
-// РІР°Р»РёРґР°С†РёСЏ РЅРёРєРЅРµР№РјР°
 const isNickNameTrueLength = (inputValue) => {
   return inputValue.length < MIN_LENGTH_NICKNAME || inputValue.length > MAX_LENGTH_NICKNAME
 }
@@ -109,7 +108,7 @@ const removeErrorsForNickname = () => {
   }
 }
 
-//Валидация Email
+// Email
 
 const isEmailTrueAdress = (inputValue) => {
   return !RegExps.EMAIL.test(inputValue)
@@ -145,8 +144,6 @@ const removeErrorsForEmail = () => {
   }
 }
 
-
-//Валидация пароля
 const passwordField = form.querySelector(`#password`);
 const passwordInputContainer = passwordField.parentNode;
 
@@ -164,6 +161,7 @@ const checkPasswordLength = (inputValue) => {
   if (inputValue.length >= MIN_LENGTH_PASSWORD) {
     isPasswordWillMoreMinLength = true;
     markSuccessPasswordListElement(requiredPasswordLengthElement);
+    return true;
   }
   else {
     if (isPasswordWillMoreMinLength) {
@@ -177,6 +175,7 @@ const checkPasswordHasnumber = (inputValue) => {
   if (inputValue.match(/[0-9]/g)) {
     isPasswordWillHasnumber = true;
     markSuccessPasswordListElement(requiredPasswordNumberElement);
+    return true;
   }
   else {
     if (isPasswordWillHasnumber) {
@@ -190,6 +189,7 @@ const checkPasswordRegister = (inputValue) => {
   if (inputValue.match(/[A-Z]/g)) {
     isPasswordWillHighRegister = true;
     markSuccessPasswordListElement(requiredPasswordRegisterElement);
+    return true;
   }
   else {
     if (isPasswordWillHighRegister) {
@@ -214,31 +214,31 @@ const passwordInputHandler = () => {
   const passwordChecks = [checkPasswordHasnumber(inputValue), checkPasswordLength(inputValue), checkPasswordRegister(inputValue)];
 
   if (passwordChecks.every(isEveryTrue)) {
+    console.log(checkPasswordHasnumber(inputValue))
     isPasswordInputValid = true;
   } else {
+    console.log(passwordChecks.every(isEveryTrue))
+
     isPasswordInputValid = false;
   }
 }
 
 const isPasswordEqualAnotherField = (inputValue) => {
+  removePasswordErrors(inputValue);
+
   if (inputValue.length && inputValue === nickNameField.value || inputValue === emailField.value) {
     addErrorElement(passwordField, passwordInputContainer, ErrorTexts.password.equal, `password-equal-error`);
-    return;
+    return false;
+  } else {
+    return true;
   }
 
-  const currentErrors = passwordInputContainer.querySelectorAll(`.form__error`);
-
-  if (currentErrors) {
-    removeCurrentErrors(currentErrors);
-  }
-  deleteErrorsMark(passwordField);
-
-  return true;
 }
 
 const isPasswordTrueSymbols = (inputValue) => {
-  if (!RegExps.PASSWORD.test(inputValue)) {
-    addErrorElement(passwordField, passwordInputContainer, ErrorTexts.password.symbols, `password-symbol-error`)
+  if (inputValue.length && !RegExps.PASSWORD.test(inputValue)) {
+    addErrorElement(passwordField, passwordInputContainer, ErrorTexts.password.symbols, `password-symbol-error`);
+    return
   }
   return true;
 }
@@ -254,9 +254,10 @@ const passwordChangeHandler = () => {
 
   const passwordChecks = [isPasswordTrueSymbols(inputValue), isPasswordEqualAnotherField(inputValue)]
 
-  if (passwordChecks.every(isEveryTrue)) {
+  if (passwordChecks.every(isEveryTrue) && isPasswordInputValid) {
     validityList.password = true;
     passwordField.classList.remove(`error`);
+    deleteErrorsMark(passwordField);
   } else {
     validityList.password = false;
     passwordField.classList.add(`error`);
